@@ -10,11 +10,14 @@ import WhatsAppButton from "../components/WhatsAppButton";
 
 import Trusted from "../components/sections/Trusted";
 import Services from "../components/sections/Services";
-import Portfolio from "../components/sections/Portfolio";
 import Process from "../components/sections/Process";
 import Pricing from "../components/sections/Pricing";
 import Testimonials from "../components/sections/Testimonials";
 import CTA from "../components/sections/CTA";
+
+// New
+import RecentProjects from "../components/RecentProjects";
+
 
 export default function Home() {
   return (
@@ -23,50 +26,77 @@ export default function Home() {
 
       <main className="bg-black text-white overflow-x-hidden">
 
+
         {/* Hero */}
         <Hero />
+
 
         {/* Trusted Businesses */}
         <Trusted />
 
+
         {/* Statistics */}
         <Stats />
+
+
 
         {/* Services */}
         <Services />
 
-        {/* Featured Portfolio */}
-        <Portfolio />
+
+
+        {/* Recent Projects */}
+        <RecentProjects />
+
+
 
         {/* Our Process */}
         <Process />
 
+
+
         {/* Pricing */}
         <Pricing />
+
+
 
         {/* Why Choose Us */}
         <WhyChoose />
 
+
+
         {/* About */}
         <About />
+
+
 
         {/* Testimonials */}
         <Testimonials />
 
+
+
         {/* FAQ */}
         <FAQ />
+
+
 
         {/* Contact */}
         <Contact />
 
+
+
         {/* Final CTA */}
         <CTA />
 
+
       </main>
+
 
       <Footer />
 
+
       <WhatsAppButton />
+
     </>
   );
 }
