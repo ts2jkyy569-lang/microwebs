@@ -13,6 +13,12 @@ import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import ProjectDetails from "./pages/ProjectDetails";
 
+// Studio Pages
+import Order from "./pages/Order";
+import Resources from "./pages/Resources";
+import Maintenance from "./pages/Maintenance";
+import ContactPage from "./pages/ContactPage";
+
 // Authentication
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -30,6 +36,7 @@ import Payments from "./pages/dashboard/Payments";
 import Messages from "./pages/dashboard/Messages";
 import Profile from "./pages/dashboard/Profile";
 import Settings from "./pages/dashboard/Settings";
+import Quote from "./pages/Quote";
 
 // Admin Layout
 import AdminLayout from "./layouts/AdminLayout";
@@ -50,41 +57,25 @@ import Loader from "./components/Loader";
 // 404
 import NotFound from "./pages/NotFound";
 
-
 export default function App() {
+  const [loading, setLoading] = useState(true);
 
-  const [loading,setLoading] = useState(true);
-
-
-  useEffect(()=>{
-
-    const timer=setTimeout(()=>{
+  useEffect(() => {
+    const timer = setTimeout(() => {
       setLoading(false);
-    },2000);
+    }, 2000);
 
+    return () => clearTimeout(timer);
+  }, []);
 
-    return ()=>clearTimeout(timer);
-
-  },[]);
-
-
-
-  if(loading){
+  if (loading) {
     return <Loader />;
   }
 
-
-
   return (
-
     <BrowserRouter>
-
       <AuthProvider>
-
-
         <Routes>
-
-
 
           {/* ================= HOME ================= */}
 
@@ -93,8 +84,6 @@ export default function App() {
             element={<Home />}
           />
 
-
-
           {/* ================= PORTFOLIO ================= */}
 
           <Route
@@ -102,201 +91,172 @@ export default function App() {
             element={<Projects />}
           />
 
-
           <Route
             path="/projects/:id"
             element={<ProjectDetails />}
           />
 
+          {/* ================= ORDER ================= */}
 
+          <Route
+            path="/order"
+            element={<Order />}
+          />
 
+          {/* ================= RESOURCES ================= */}
 
+          <Route
+            path="/resources"
+            element={<Resources />}
+          />
+
+          {/* ================= MAINTENANCE ================= */}
+
+          <Route
+            path="/maintenance"
+            element={<Maintenance />}
+          />
+
+          {/* ================= CONTACT ================= */}
+
+          <Route
+            path="/contact"
+            element={<ContactPage />}
+          />
 
           {/* ================= AUTH ================= */}
-
 
           <Route
             path="/login"
             element={<Login />}
           />
 
-
           <Route
             path="/register"
             element={<Register />}
           />
-
 
           <Route
             path="/forgot-password"
             element={<ForgotPassword />}
           />
 
-
-
-
-
-
           {/* ================= USER DASHBOARD ================= */}
 
-
           <Route
-
             path="/dashboard"
-
             element={
               <ProtectedRoute>
                 <DashboardLayout />
               </ProtectedRoute>
             }
-
           >
-
-
             <Route
               index
               element={<Dashboard />}
             />
-
 
             <Route
               path="new-order"
               element={<NewOrder />}
             />
 
-
             <Route
               path="projects"
               element={<ProjectsPage />}
             />
-
 
             <Route
               path="orders"
               element={<Orders />}
             />
 
-
             <Route
               path="payments"
               element={<Payments />}
             />
-
 
             <Route
               path="messages"
               element={<Messages />}
             />
 
-
             <Route
               path="profile"
               element={<Profile />}
             />
 
-
             <Route
               path="settings"
               element={<Settings />}
             />
-
-
           </Route>
-
-
-
-
-
 
           {/* ================= ADMIN ================= */}
 
-
           <Route
-
             path="/admin"
-
             element={
               <AdminRoute>
                 <AdminLayout />
               </AdminRoute>
             }
-
           >
-
-
             <Route
               index
               element={<AdminDashboard />}
             />
-
 
             <Route
               path="orders"
               element={<AdminOrders />}
             />
 
-
             <Route
               path="projects"
               element={<AdminProjects />}
             />
-
 
             <Route
               path="payments"
               element={<AdminPayments />}
             />
 
-
             <Route
               path="customers"
               element={<AdminCustomers />}
             />
-
 
             <Route
               path="messages"
               element={<AdminMessages />}
             />
 
-
             <Route
               path="analytics"
               element={<AdminAnalytics />}
             />
 
-
             <Route
               path="settings"
               element={<AdminSettings />}
             />
-
-
           </Route>
 
-
-
-
-
+          <Route
+            path="/quote"
+            element={<Quote />}
+          />
 
           {/* ================= 404 ================= */}
-
 
           <Route
             path="*"
             element={<NotFound />}
           />
 
-
-
         </Routes>
-
-
       </AuthProvider>
-
-
     </BrowserRouter>
-
   );
-
 }

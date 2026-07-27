@@ -1,372 +1,405 @@
 import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { projects } from "../data/projects";
+import {
+  FaExternalLinkAlt,
+  FaGlobe,
+  FaMobileAlt,
+  FaTabletAlt,
+  FaDesktop,
+  FaReact,
+} from "react-icons/fa";
+import {
+  SiVite,
+  SiTailwindcss,
+  SiFramer,
+  SiReactrouter,
+} from "react-icons/si";
 
+export default function ProjectDetails() {
+  const { id } = useParams();
 
-export default function ProjectDetails(){
+  const project = projects.find((item) => item.id === id);
 
+  if (!project) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-5xl font-black">Project Not Found</h1>
 
-const {id}=useParams();
+          <Link
+            to="/projects"
+            className="inline-block mt-8 bg-yellow-400 text-black px-8 py-3 rounded-xl font-bold"
+          >
+            Back to Portfolio
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
+  return (
+    <div className="bg-black text-white">
 
-const project =
-projects.find(
-(item)=>item.id===id
-);
+      {/* HERO */}
 
+      <section className="py-24 border-b border-neutral-800">
 
+        <div className="max-w-7xl mx-auto px-6 text-center">
 
-if(!project){
+          <span className="inline-block px-5 py-2 rounded-full border border-yellow-400 text-yellow-400 font-semibold">
+            FEATURED CASE STUDY
+          </span>
 
-return(
+          <h1 className="text-5xl md:text-7xl font-black mt-6">
+            {project.title}
+          </h1>
 
-<div className="min-h-screen bg-black text-white flex items-center justify-center">
+          <p className="text-xl text-gray-400 mt-5">
+            {project.category}
+          </p>
 
-<h1 className="text-4xl">
-Project Not Found
-</h1>
+          <div className="flex flex-wrap justify-center gap-5 mt-10">
 
-</div>
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="bg-yellow-400 text-black px-8 py-4 rounded-xl font-bold flex items-center gap-3"
+            >
+              <FaExternalLinkAlt />
+              Visit Website
+            </a>
 
-)
+            <Link
+              to="/order"
+              className="border border-yellow-400 text-yellow-400 px-8 py-4 rounded-xl font-bold hover:bg-yellow-400 hover:text-black transition"
+            >
+              Order Similar Website
+            </Link>
 
-}
+          </div>
 
+        </div>
 
+      </section>
 
+      {/* BROWSER */}
 
-return (
+      <section className="py-20 px-6">
 
-<div className="bg-black text-white min-h-screen">
+        <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden border border-neutral-800">
 
+          <div className="bg-neutral-900 p-4 flex items-center">
 
+            <div className="flex gap-2">
 
-{/* HERO */}
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
 
+            </div>
 
-<section className="py-20 px-6 text-center">
+            <div className="flex-1 text-center text-gray-400 text-sm">
+              {project.liveUrl}
+            </div>
 
+          </div>
 
-<h1 className="text-6xl font-bold">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full"
+          />
 
-{project.title}
+        </div>
 
-</h1>
+      </section>
 
+      {/* PROJECT INFO */}
 
-<p className="text-gray-400 text-xl mt-4">
+      <section className="max-w-6xl mx-auto px-6 py-10">
 
-{project.category}
+        <div className="grid md:grid-cols-4 gap-8">
 
-</p>
+          <div className="bg-neutral-900 rounded-2xl p-6">
 
+            <p className="text-gray-400">Industry</p>
 
+            <h3 className="text-2xl font-bold mt-3">
+              {project.industry}
+            </h3>
 
-<div className="mt-8 flex justify-center gap-4">
+          </div>
 
+          <div className="bg-neutral-900 rounded-2xl p-6">
 
-<a
+            <p className="text-gray-400">Timeline</p>
 
-href={project.liveUrl}
+            <h3 className="text-2xl font-bold mt-3">
+              {project.timeline}
+            </h3>
 
-target="_blank"
+          </div>
 
-className="bg-blue-600 px-8 py-3 rounded-xl"
+          <div className="bg-neutral-900 rounded-2xl p-6">
 
->
+            <p className="text-gray-400">Performance</p>
 
-Visit Website
+            <h3 className="text-2xl font-bold mt-3">
+              Excellent
+            </h3>
 
-</a>
+          </div>
 
+          <div className="bg-neutral-900 rounded-2xl p-6">
 
+            <p className="text-gray-400">Rating</p>
 
-<Link
+            <h3 className="text-2xl font-bold mt-3">
+              ⭐⭐⭐⭐⭐
+            </h3>
 
-to="/dashboard/new-order"
+          </div>
 
-className="border border-white px-8 py-3 rounded-xl"
+        </div>
 
->
+      </section>
 
-Order Similar Website
+      {/* RESPONSIVE */}
 
-</Link>
+      <section className="max-w-6xl mx-auto px-6 py-10">
 
+        <h2 className="text-4xl font-bold mb-10">
+          Fully Responsive
+        </h2>
 
-</div>
+        <div className="grid md:grid-cols-3 gap-6">
 
+          <div className="bg-neutral-900 rounded-2xl p-8 text-center">
 
-</section>
+            <FaDesktop className="mx-auto text-5xl text-yellow-400" />
 
+            <h3 className="mt-5 text-xl font-bold">
+              Desktop
+            </h3>
 
+          </div>
 
+          <div className="bg-neutral-900 rounded-2xl p-8 text-center">
 
+            <FaTabletAlt className="mx-auto text-5xl text-yellow-400" />
 
+            <h3 className="mt-5 text-xl font-bold">
+              Tablet
+            </h3>
 
-{/* BROWSER MOCKUP */}
+          </div>
 
+          <div className="bg-neutral-900 rounded-2xl p-8 text-center">
 
-<section className="px-6">
+            <FaMobileAlt className="mx-auto text-5xl text-yellow-400" />
 
+            <h3 className="mt-5 text-xl font-bold">
+              Mobile
+            </h3>
 
-<div className="max-w-6xl mx-auto rounded-2xl overflow-hidden bg-gray-900">
+          </div>
 
+        </div>
 
-<div className="bg-gray-800 p-4 flex items-center gap-2">
+      </section>
 
+      {/* TECHNOLOGY */}
 
-<span>●</span>
+      <section className="max-w-6xl mx-auto px-6 py-20">
 
-<span>●</span>
+        <h2 className="text-4xl font-bold mb-10">
+          Technology Used
+        </h2>
 
-<span>●</span>
+        <div className="grid md:grid-cols-5 gap-6">
 
+          <div className="bg-neutral-900 rounded-2xl p-6 text-center">
+            <FaReact className="mx-auto text-5xl text-cyan-400" />
+            <p className="mt-4">React</p>
+          </div>
 
-<p className="ml-4 text-gray-300">
+          <div className="bg-neutral-900 rounded-2xl p-6 text-center">
+            <SiVite className="mx-auto text-5xl text-purple-400" />
+            <p className="mt-4">Vite</p>
+          </div>
 
-dinepro-restaurant.netlify.app
+          <div className="bg-neutral-900 rounded-2xl p-6 text-center">
+            <SiTailwindcss className="mx-auto text-5xl text-sky-400" />
+            <p className="mt-4">Tailwind CSS</p>
+          </div>
 
-</p>
+          <div className="bg-neutral-900 rounded-2xl p-6 text-center">
+            <SiFramer className="mx-auto text-5xl text-pink-400" />
+            <p className="mt-4">Framer Motion</p>
+          </div>
 
+          <div className="bg-neutral-900 rounded-2xl p-6 text-center">
+            <SiReactrouter className="mx-auto text-5xl text-red-400" />
+            <p className="mt-4">React Router</p>
+          </div>
 
-</div>
+        </div>
 
+      </section>
 
+      {/* FEATURES */}
 
-<img
+      <section className="max-w-6xl mx-auto px-6 py-10">
 
-src={project.image}
+        <h2 className="text-4xl font-bold mb-10">
+          Project Features
+        </h2>
 
-alt={project.title}
+        <div className="grid md:grid-cols-2 gap-5">
 
-className="w-full"
+          {project.features.map((feature) => (
+            <div
+              key={feature}
+              className="bg-neutral-900 border border-neutral-800 rounded-2xl p-5"
+            >
+              ✓ {feature}
+            </div>
+          ))}
 
-/>
+        </div>
 
+      </section>
 
+      {/* CLIENT BENEFITS */}
 
-</div>
+      <section className="max-w-6xl mx-auto px-6 py-20">
 
+        <h2 className="text-4xl font-bold mb-10">
+          Included With Every Website
+        </h2>
 
-</section>
+        <div className="grid md:grid-cols-2 gap-6">
 
+          {[
+            "Responsive Design",
+            "Fast Performance",
+            "SEO Ready",
+            "WhatsApp Integration",
+            "Google Maps",
+            "Contact Forms",
+            "Analytics Integration",
+            "Modern UI/UX",
+          ].map((item) => (
+            <div
+              key={item}
+              className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6"
+            >
+              ✓ {item}
+            </div>
+          ))}
 
+        </div>
 
+      </section>
 
+      {/* PROCESS */}
 
+      <section className="bg-neutral-950 py-20">
 
-{/* PROJECT INFO */}
+        <div className="max-w-6xl mx-auto px-6">
 
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Our Development Process
+          </h2>
 
-<section className="grid md:grid-cols-3 gap-8 p-10 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-6 gap-6 text-center">
 
+            {[
+              "Discovery",
+              "Planning",
+              "Design",
+              "Development",
+              "Testing",
+              "Launch",
+            ].map((step, index) => (
+              <div key={step}>
 
-<div>
+                <div className="w-16 h-16 mx-auto rounded-full bg-yellow-400 text-black flex items-center justify-center font-black text-xl">
+                  {index + 1}
+                </div>
 
-<h3 className="text-gray-400">
-Industry
-</h3>
+                <p className="mt-5">{step}</p>
 
-<p className="text-xl">
-{project.industry}
-</p>
+              </div>
+            ))}
 
-</div>
+          </div>
 
+        </div>
 
+      </section>
 
-<div>
+      {/* SCREENSHOTS */}
 
-<h3 className="text-gray-400">
-Timeline
-</h3>
+      <section className="max-w-6xl mx-auto px-6 py-20">
 
-<p className="text-xl">
-{project.timeline}
-</p>
+        <h2 className="text-4xl font-bold mb-10">
+          More Screenshots
+        </h2>
 
-</div>
+        <div className="grid md:grid-cols-3 gap-8">
 
+          {project.screenshots.map((shot) => (
+            <div
+              key={shot.title}
+              className="rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800"
+            >
+              <img
+                src={shot.image}
+                alt={shot.title}
+                className="w-full h-56 object-cover"
+              />
 
+              <div className="p-5 font-semibold">
+                {shot.title}
+              </div>
 
-<div>
+            </div>
+          ))}
 
-<h3 className="text-gray-400">
-Rating
-</h3>
+        </div>
 
-<p className="text-xl">
-{project.rating}
-</p>
+      </section>
 
-</div>
+      {/* CTA */}
 
+      <section className="py-24 bg-yellow-400 text-black">
 
+        <div className="max-w-5xl mx-auto text-center px-6">
 
-</section>
+          <FaGlobe className="mx-auto text-6xl mb-6" />
 
+          <h2 className="text-5xl font-black">
+            Ready for a Website Like This?
+          </h2>
 
+          <p className="mt-6 text-xl max-w-3xl mx-auto">
+            We'll customize this design to match your brand, business, and goals.
+          </p>
 
+          <Link
+            to="/order"
+            className="inline-block mt-10 bg-black text-white px-10 py-4 rounded-2xl font-bold hover:scale-105 transition"
+          >
+            Start Your Project
+          </Link>
 
+        </div>
 
+      </section>
 
-{/* TECHNOLOGY */}
-
-
-<section className="p-10 max-w-6xl mx-auto">
-
-
-<h2 className="text-3xl font-bold">
-
-Technology Used
-
-</h2>
-
-
-<div className="flex flex-wrap gap-3 mt-5">
-
-
-{
-project.technology.map((item)=>(
-
-<span
-
-key={item}
-
-className="bg-gray-800 px-5 py-2 rounded-full"
-
->
-
-{item}
-
-</span>
-
-))
-
-}
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-{/* FEATURES */}
-
-
-<section className="p-10 max-w-6xl mx-auto">
-
-
-<h2 className="text-3xl font-bold">
-
-Features
-
-</h2>
-
-
-<div className="mt-6 space-y-3">
-
-
-{
-project.features.map((item)=>(
-
-<p key={item}>
-
-✓ {item}
-
-</p>
-
-))
-
-}
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-{/* SCREENSHOTS */}
-
-
-<section className="p-10 max-w-6xl mx-auto">
-
-
-<h2 className="text-3xl font-bold mb-8">
-
-More Screenshots
-
-</h2>
-
-
-
-<div className="grid md:grid-cols-3 gap-6">
-
-
-{
-project.screenshots.map((shot)=>(
-
-
-<div
-
-key={shot.title}
-
-className="bg-gray-900 rounded-xl overflow-hidden"
-
->
-
-
-<img
-
-src={shot.image}
-
-alt={shot.title}
-
-className="w-full"
-
-/>
-
-
-<p className="p-4">
-
-{shot.title}
-
-</p>
-
-
-</div>
-
-
-))
-
-}
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-</div>
-
-
-)
-
+    </div>
+  );
 }
